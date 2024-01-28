@@ -3,11 +3,8 @@ import React from "react";
 import bg from '@/assets/img/1330376.png'
 
 export default function Home() {
-  
-
   return (
-    <main
-    style={{
+    <main style={{
       backgroundImage: `url(${bg.src})`,
     }}
     className="home__body">

@@ -128,11 +128,18 @@ body {
   display: flex;
   text-align: center;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   padding: var(--base);
   border-bottom: 1px solid var(--main-color);
   margin-bottom: var(--base);
 }
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--base);
+}
+
 
 .header h1 {
   margin: 0;

@@ -1,12 +1,12 @@
 
-import FormWrapper from "./(wrapper)/FormWrapper";
+import LoginForm from "./(components)/FormLoging";
 
 export default function Login() {
  
   return (
     <main className="">
       <h1>Login</h1>
-      <FormWrapper />
+      <LoginForm />
     </main>
   );
 }

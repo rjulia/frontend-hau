@@ -3,7 +3,7 @@ import getLastNumberFromUrl from "@/lib/utils/getLastNumberFromUrl";
 import BtnGoBack from "@/components/BtnGoBack";
 
 async function getDetail(id:string) {
-  const res = await fetch(`http://localhost:3000/api/characters/${id}`, { cache: 'force-cache' })
+  const res = await fetch(`http://localhost:8000/api/characters/${id}`, { cache: 'force-cache' })
  
   if (!res.ok) {
     throw new Error('Failed to fetch data')

@@ -1,9 +1,8 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { useDispatch, TypedUseSelectorHook, useSelector } from "react-redux";
 import { persistReducer } from "redux-persist";
-// import storage from "redux-persist/lib/storage";
+import storage from "redux-persist/lib/storage";
 import { authReducer } from "./slices/authSlice";
-import storage from "./local-storage/storage";
 import logger from "redux-logger";
 
 const authPersistConfig = {
