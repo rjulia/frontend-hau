@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import ReduxProvider from "@/lib/store/provaider";
 import { Roboto } from 'next/font/google'
 import "./globals.css";
+import {FavoriteProvider} from "@/lib/hooks/useFavorites";
 
 const roboto = Roboto({
   weight: ['100', '400','500', '900'],
@@ -21,7 +22,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={roboto.className}>
         <ReduxProvider>
-          {children}
+          <FavoriteProvider>
+            {children}
+          </FavoriteProvider>
         </ReduxProvider>
       </body>
     </html>

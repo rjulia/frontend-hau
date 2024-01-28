@@ -6,6 +6,8 @@ import * as Yup from "yup";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/lib/store/store";
 import { setAuth, setJid } from "@/lib/store/slices/authSlice";
+import { setFav } from "@/lib/store/slices/favSlice";
+import { useFavorite } from "@/lib/hooks/useFavorites";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -15,6 +17,7 @@ const LoginSchema = Yup.object().shape({
 export default function FormLoging() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { addFavorites } = useFavorite()
 
   const dispatch = useAppDispatch();
 
@@ -25,7 +28,6 @@ export default function FormLoging() {
 
 
   const handleSubmit = async (values:FormValues) => {
-    console.log(values);
     setLoading(true);
     try {
       const res = await fetch(`http://localhost:8000/api/users/login`, {
@@ -36,7 +38,9 @@ export default function FormLoging() {
         mode: "cors",
       });
       const data = await res.json();
+      console.log("🚀 ~ handleSubmit ~ data:", data)
       if (!res.ok) throw new Error(data.message);
+      addFavorites(data.favorites)
       dispatch(setJid(data.token));
       dispatch(setAuth(true));
       router.push("/caracthers");
