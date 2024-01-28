@@ -11,7 +11,7 @@ function BtnGoBack() {
     router.back()
   }
   return (
-    <button className='btn--goback' type="button" onClick={handleClick}>
+    <button className='btn btn--goback' type="button" onClick={handleClick}>
       <MdArrowBackIos />
       go back
     </button>

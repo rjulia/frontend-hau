@@ -1,13 +1,13 @@
 /* Global styles */
-
-
 :root {
   --main-color: #01295e;
   --secondary-color: #005792;
   --third-color: #00bbf0;
   --fourth-color: #fdb44b;
   --base: 16px;
+  --white: #fff;
 }
+
 a {
   text-decoration: none;
 }
@@ -17,28 +17,93 @@ body {
   padding: 0;
   font-size: var(--base);
   color: #333;
-
 }
-
-.btn--goback {
-  background-color: var(--main-color);
-  color: #fff;
-  padding: calc(var(--base) * 0.5) calc(var(--base) * 1);
-  border-radius: calc(var(--base) * 0.5);
+.btn {
+  background-color: transparent;
   border: none;
   cursor: pointer;
   outline: none;
+  border-radius: calc(var(--base) * 0.5);
+  padding: calc(var(--base) * 0.5) calc(var(--base) * 1);
   text-transform: uppercase;
   font-weight: 500;
   font-size: calc(var(--base) * 0.75);
-  transition: all 0.3s ease;
+
 }
 
-.loading-container {
+.btn--primary {
+  background-color: var(--main-color);
+  color: #fff;
+}
+
+.btn--secondary {
+  background-color: var(--secondary-color);
+  color: #fff;
+}
+.btn--goback {
+  background-color: var(--main-color);
+  color: #fff;
+}
+
+.loading__container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+.home__body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-clip: content-box;
+}
+
+
+.home__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+.home__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  margin: 0 auto;
+  max-width: 500px;
+  background-color: var(--third-color);
+  border-radius: calc(var(--base) * 0.5);
+  box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.2);
+  padding: calc(var(--base) * 2);
+}
+.home__card__footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--base);
+  margin-top: calc(var(--base) * 2);
+}
+
+.home__card .home__card__body h1 {
+  margin: 0;
+  padding: 0;
+  font-size: calc(var(--base) * 3);
+  font-weight: 900;
+  color: var(--main-color);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: calc(var(--base) * 0.125);
 }
 
 .spinner {
@@ -111,8 +176,6 @@ body {
   flex: 1 0 auto;
   padding: var(--base);
 }
-
-
 
 .list {
   display: grid;
@@ -228,8 +291,6 @@ body {
   letter-spacing: calc(var(--base) * 0.125);
   margin-bottom: var(--base);
 }
-
-
 
 .detailPage__episode__body {
   display: grid;

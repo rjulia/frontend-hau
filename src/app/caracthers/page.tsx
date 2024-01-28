@@ -3,7 +3,7 @@ import type { Character } from "@/types"
 import { Suspense } from "react"
 import Loading from "./loading"
 async function getData() {
-  const res = await fetch('http://localhost:3000/api/characters/', { cache: 'force-cache' })
+  const res = await fetch(`${process.env.DB_HOST}/api/characters/`, { cache: 'force-cache' })
  
   if (!res.ok) {
     throw new Error('Failed to fetch data')
