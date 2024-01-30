@@ -1,6 +1,6 @@
 "use client";
 import Header from "@/components/Header";
-import { setAuth, setJid } from "@/lib/store/slices/authSlice";
+import { setAuth, setUser } from "@/lib/store/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/store/store";
 import { useRouter } from "next/navigation";
 
@@ -16,7 +16,13 @@ export default function RootLayout({
   const router = useRouter()
   
   const handleLogout = () => {
-    dispatch(setJid(""));
+    dispatch(setUser({
+      _id: "",
+      email: "",
+      token: "",
+      favorites: [],
+
+    }));
     dispatch(setAuth(false));
   };
 

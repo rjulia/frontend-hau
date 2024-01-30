@@ -1,30 +1,37 @@
+'use client';
 import Card from "@/components/Card"
-import type { Character } from "@/types"
-import { Suspense } from "react"
+import type { ICharacter } from "@/types"
+import { Suspense, useEffect, useState } from "react"
 import Loading from "./loading"
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/lib/store/store";
+import { useGetCharactersMutation } from "@/lib/store/api";
+// import { fetchGetCharacters } from "@/lib/store/slices/charactersSlice";
 
-async function getData() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_DB_HOST}/api/characters/`, { cache: 'force-cache' })
- 
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
-  }
- 
-  return res.json()
-}
 
-export default async function CaractherPage() {
-  const data = await getData()
+export default function CaractherPage() {
+
+  const [characters, setCharacters] = useState<ICharacter[]>([] as ICharacter[]);
+ 
+  const [getCharacters, { isLoading }] = useGetCharactersMutation();
+ 
+  useEffect(() => {
+    getCharacters().unwrap().then((res) => {
+      console.log("🚀 ~ caractherReq ~ res:", res)
+      setCharacters(res.results)
+    })
+  }, [])
+
   return (
     <div className="layout">
         <div className="layout__header">
-          <h2>Characters 3</h2>
+          <h2>Characters</h2>
         </div>
         <div className="layout__main">
           <div className="col-12">
           <Suspense fallback={<Loading/>}>
             <ul className="list">
-              {data?.results.map((item:Character) => (
+              {characters?.map((item:ICharacter) => (
                 <Card 
                   id={item.id}
                   key={item.id}

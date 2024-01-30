@@ -5,9 +5,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/lib/store/store";
-import { setAuth, setJid } from "@/lib/store/slices/authSlice";
+import { setAuth, setUser } from "@/lib/store/slices/authSlice";
 import { setFav } from "@/lib/store/slices/favSlice";
-import { useFavorite } from "@/lib/hooks/useFavorites";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -17,7 +16,6 @@ const LoginSchema = Yup.object().shape({
 export default function FormLoging() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const { addFavorites } = useFavorite()
 
   const dispatch = useAppDispatch();
 
@@ -25,7 +23,6 @@ export default function FormLoging() {
     email: string;
     password: string;
   };
-
 
   const handleSubmit = async (values:FormValues) => {
     setLoading(true);
@@ -38,10 +35,9 @@ export default function FormLoging() {
         mode: "cors",
       });
       const data = await res.json();
-      console.log("🚀 ~ handleSubmit ~ data:", data)
       if (!res.ok) throw new Error(data.message);
-      addFavorites(data.favorites)
-      dispatch(setJid(data.token));
+      dispatch(setFav(data.favorites))
+      dispatch(setUser(data));
       dispatch(setAuth(true));
       router.push("/caracthers");
     } catch (err) {
@@ -68,7 +64,7 @@ export default function FormLoging() {
         </div>
         <div>
           <label htmlFor="password">Password</label>
-          <Field type="password" id="password" name="password" />
+          <Field type="password" id="password" name="password" autoComplete='on' />
           <ErrorMessage name="password" component="div" />
         </div>
         <button type="submit">Login</button>
